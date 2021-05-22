@@ -3,20 +3,27 @@
 <div class="row mb-4 post">
   <div class="col-md-5">
     <h2>
-      <a href="/post/{{post.id}}">{{post.name}}</a>
+      {{!-- posts? --}}
+      <a href="/posts/{{post.id}}">{{post.name}}</a> 
     </h2>
-    <p>Created by {{post.user.name}} on {{format_date post.date_created}}</p>
+    <p>Created by {{post.user.name}}</p>
   </div>
   <div class="col-md-7">
     <p>
       {{post.content}}
     </p>
   </div>
+  <div>
+    <p>
+      {{!-- each through the comments --}}
+      {{post.comments}}
+    </p>
+  </div>
 </div>
 {{/each}}
 
 {{!-- do i need a seperate handlebars file for comment? --}}
-{{#each commments as |comment|}}
+{{!-- {{#each commments as |comment|}}
 <div>
 <h3>
   Comments:
@@ -32,6 +39,7 @@
   <label for="comments">Leave a comment:</label>
   <input class="form-input" type="input" id="comments" />
 </div>
-<div class="form-group">
+<div class="form-group-comments-submit">
   <button class="btn btn-primary" type="submit">send</button>
 </div>
+{{/each}} --}}
