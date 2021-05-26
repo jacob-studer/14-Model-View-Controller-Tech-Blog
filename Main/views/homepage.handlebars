@@ -6,7 +6,7 @@
       {{!-- posts? --}}
       <a href="/posts/{{post.id}}">{{post.name}}</a> 
     </h2>
-    <p>Created by {{post.user.email}}</p>
+    <p>Created by {{post.user.username}}</p>
   </div>
   <div class="col-md-7">
     <p>
@@ -22,7 +22,7 @@
   {{post.comments}}
   </p>
   <p>
-  comment by: {{post.comments.user.email}}
+  comment by: {{post.comments.user.username}}
   </p>
   <div class="form-group-comments">
   <label for="comments">Leave a comment:</label>
