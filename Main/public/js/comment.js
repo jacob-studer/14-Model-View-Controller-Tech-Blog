@@ -1,12 +1,14 @@
 const commentFormHandler = async (event) => {
+    console.log('works')
     event.preventDefault();
     
     const content = document.querySelector('#comments').value.trim();
+    const post_id = document.querySelector('#post-id').value.trim();
     
-    if (content) {
+    if (content && post_id) {
         const response = await fetch(`/api/comments`, {
         method: 'POST',
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ content, post_id }),
         headers: {
             'Content-Type': 'application/json',
         },
@@ -22,4 +24,4 @@ const commentFormHandler = async (event) => {
 
 const commentsubmit = document.querySelector('.form-group-comments-submit')
 
-commentsubmit.addEventListener('submit', commentFormHandler);
+commentsubmit.addEventListener('click', commentFormHandler);

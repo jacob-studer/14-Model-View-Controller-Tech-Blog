@@ -8,7 +8,9 @@ router.get('/', async (req, res) => {
     // Get all posts and JOIN with user data
     const postData = await Post.findAll({
       include: [
-        User, Comment
+        User,
+        { model: Comment, 
+        include: [User]}
       ],
     });
 
@@ -24,28 +26,6 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// router.get('/', async (req, res) => {
-//   try {
-//     // Get all comments and JOIN with post data
-//     const commentData = await Comment.findAll({
-//       include: [
-//         Post
-//       ],
-//     });
-
-//     // Serialize data so the template can read it
-//     const comments = commentData.map((Comment) => Comment.get({ plain: true }));
-
-//     // Pass serialized data and session flag into template
-//     res.render('homepage', { 
-//       comments, 
-//       logged_in: req.session.logged_in 
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 router.get('/Post/:id', async (req, res) => {
   try {
@@ -71,6 +51,7 @@ router.get('/Post/:id', async (req, res) => {
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
+  console.log(req.session)
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -90,6 +71,7 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+  
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');

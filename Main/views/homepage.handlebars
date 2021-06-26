@@ -19,13 +19,16 @@
       {{!-- {{post.comments}} --}}
     </p>
     <p>
-  {{post.comments}}
+      {{#each post.comments as |comment|}}
+  {{comment.content}}
   </p>
   <p>
-  comment by: {{post.comments.user.username}}
+  comment by: {{comment.user.username}}
   </p>
+  {{/each}}
   <div class="form-group-comments">
   <label for="comments">Leave a comment:</label>
+  <input type="hidden" id='post-id' value="{{post.id}}">
   <input class="form-input" type="input" id="comments" />
   </div>
   <div>
@@ -38,3 +41,4 @@
 
 {{/each}}
 
+<script src="/js/comment.js"></script>
